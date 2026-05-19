@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+<header>
+    <h1>Your Cart</h1>
+    <a href="index.html">← Back to Shop</a>
+</header>
+
+<section class="cart">
+
+    <div class="cart-items">
+
+        <!-- Item 1 -->
+        <div class="cart-item">
+            <img src="images/p1.jpg" alt="Product">
+            <div class="item-details">
+                <h3>sirang 5090</h3>
+                <p>₱500</p>
+                <input type="number" value="1" min="1">
+                <button class="remove-btn">Remove</button>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="cart-item">
+            <img src="images/p2.jpg" alt="Product">
+            <div class="item-details">
+                <h3>laptop na celeron</h3>
+                <p>₱300</p>
+                <input type="number" value="1" min="1">
+                <button class="remove-btn">Remove</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Total Section -->
+    <div class="cart-total">
+        <h2>Total: ₱800</h2>
+        <button class="checkout-btn">Checkout</button>
+    </div>
+
+</section>
+
+</body>
+</html>

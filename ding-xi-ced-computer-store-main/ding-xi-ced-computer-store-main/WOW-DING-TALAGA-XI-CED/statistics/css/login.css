@@ -1,0 +1,384 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: .2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 2rem 9%;
+}
+
+/* ── Button ── */
+.btn {
+    display: block;
+    width: 100%;
+    margin-top: 2.5rem;
+    border-radius: .5rem;
+    background: transparent;
+    color: white;
+    padding: 1.2rem 4rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: .15rem;
+    border: .2rem solid crimson;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: crimson;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+}
+
+.btn:hover {
+    color: white;
+}
+
+/* ── Header ── */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(8, 24, 37, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.6rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    border-bottom: .1rem solid rgba(220, 20, 60, 0.25);
+    box-shadow: 0 .2rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+header .logo {
+    font-size: 3rem;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: .15rem;
+}
+
+header .logo span {
+    color: crimson;
+}
+
+header .navbar {
+    display: flex;
+    align-items: center;
+}
+
+header .navbar a {
+    font-size: 1.6rem;
+    padding: 0 1.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: .08rem;
+    position: relative;
+}
+
+header .navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -.4rem;
+    left: 1.8rem;
+    right: 1.8rem;
+    height: .2rem;
+    background: crimson;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+
+header .navbar a:hover {
+    color: white;
+}
+
+header .navbar a:hover::after {
+    transform: scaleX(1);
+}
+
+header .icons a {
+    font-size: 2.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-left: 2rem;
+    transition: color .2s ease, transform .2s ease;
+}
+
+header .icons a:hover {
+    color: crimson;
+    transform: translateY(-.2rem);
+}
+
+header #toggler {
+    display: none;
+}
+
+header .fa-bars {
+    font-size: 2.8rem;
+    color: white;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: .1rem solid rgba(220, 20, 60, 0.3);
+    display: none;
+    transition: background .2s ease;
+}
+
+header .fa-bars:hover {
+    background: rgba(220, 20, 60, 0.15);
+}
+
+/* ── Hero Background ── */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url(../images/image0.jpg) no-repeat center/cover;
+    position: relative;
+    padding-top: 8rem;
+}
+
+.home::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+/* ── Wrapper ── */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    width: 42rem;
+    background: rgba(8, 24, 37, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: .1rem solid rgba(220, 20, 60, 0.25);
+    border-radius: 1.2rem;
+    padding: 4rem;
+}
+
+/* ── Form Box ── */
+.form-box {
+    width: 100%;
+}
+
+/* ── Form Heading ── */
+.form-box h2 {
+    font-size: 3.2rem;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: .15rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.form-box h2::after {
+    content: '';
+    display: block;
+    width: 4rem;
+    height: .3rem;
+    background: crimson;
+    margin: .8rem auto 0;
+    border-radius: .2rem;
+}
+
+/* ── Input Box ── */
+.input-box {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 1.4rem 1.4rem 1.4rem 4rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: .1rem solid rgba(255, 255, 255, 0.15);
+    border-radius: .6rem;
+    font-size: 1.5rem;
+    color: white;
+    text-transform: none;
+    transition: border .3s ease, background .3s ease;
+}
+
+.input-box input:focus {
+    border-color: crimson;
+    background: rgba(220, 20, 60, 0.07);
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    transition: .3s ease;
+    text-transform: capitalize;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: 0;
+    left: 1.2rem;
+    font-size: 1.1rem;
+    background: #081825;
+    padding: 0 .5rem;
+    color: crimson;
+}
+
+.input-box .icon {
+    position: absolute;
+    top: 50%;
+    left: 1.2rem;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color .3s ease;
+    pointer-events: none;
+}
+
+.input-box input:focus ~ .icon,
+.input-box input:valid ~ .icon {
+    color: crimson;
+}
+
+/* ── Remember / Forgot ── */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: .8rem;
+}
+
+.remember-forgot label {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.remember-forgot input[type="checkbox"] {
+    accent-color: crimson;
+    width: 1.4rem;
+    height: 1.4rem;
+    cursor: pointer;
+}
+
+.remember-forgot a {
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: none;
+}
+
+.remember-forgot a:hover {
+    color: crimson;
+}
+
+/* ── Switch Link ── */
+.login-register {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: none;
+}
+
+.login-register p {
+    text-transform: none;
+}
+
+.login-register a {
+    color: crimson;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.login-register a:hover {
+    text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+    html { font-size: 55%; }
+    header { padding: 1.6rem 2rem; }
+    section { padding: 2rem; }
+}
+
+@media (max-width: 768px) {
+    header .fa-bars { display: block; }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(8, 24, 37, 0.97);
+        border-top: .1rem solid rgba(220, 20, 60, 0.2);
+        display: block;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        overflow: hidden;
+        transition: clip-path .3s ease;
+    }
+
+    header #toggler:checked ~ .navbar {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    header .navbar a {
+        margin: 1rem 1.5rem;
+        padding: 1.2rem 1.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: .1rem solid rgba(255, 255, 255, 0.07);
+        border-radius: .4rem;
+        display: block;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    header .navbar a::after { display: none; }
+
+    .wrapper {
+        width: 90%;
+        padding: 3rem 2.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    html { font-size: 50%; }
+
+    .wrapper {
+        width: 95%;
+        padding: 2.5rem 2rem;
+    }
+}

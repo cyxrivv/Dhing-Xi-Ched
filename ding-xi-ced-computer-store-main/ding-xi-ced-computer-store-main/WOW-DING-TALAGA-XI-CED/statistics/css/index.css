@@ -1,0 +1,603 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    /* REMOVED: text-transform: capitalize — breaks email inputs, nav labels, and button text */
+    /* REMOVED: transition: .2s linear — too broad, causes layout jank; transitions moved to specific elements */
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+body {
+    background: #081825;
+}
+
+section {
+    padding: 2rem 9%;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 2.5rem;
+    border-radius: .5rem;
+    background: transparent;
+    color: white;
+    padding: 1.2rem 4rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: .15rem;
+    border: .2rem solid crimson;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: color .3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: crimson;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+}
+
+.btn:hover {
+    color: white;
+}
+
+
+/* ─── HEADER ─────────────────────────────────────── */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(8, 24, 37, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.6rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    border-bottom: .1rem solid rgba(220, 20, 60, 0.25);
+    box-shadow: 0 .2rem 2rem rgba(0, 0, 0, 0.3);
+    /* FIX: ensure header always receives pointer events above all sections */
+    pointer-events: all;
+}
+
+header .logo {
+    font-size: 3rem;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: .15rem;
+    transition: color .2s ease;
+}
+
+header .logo span {
+    color: crimson;
+}
+
+header .navbar {
+    display: flex;
+    align-items: center;
+}
+
+header .navbar a {
+    font-size: 1.6rem;
+    padding: 0 1.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: .08rem;
+    position: relative;
+    /* FIX: explicit display so ::after pseudo-element positions correctly */
+    display: inline-block;
+    transition: color .2s ease;
+}
+
+header .navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -.4rem;
+    left: 1.8rem;
+    right: 1.8rem;
+    height: .2rem;
+    background: crimson;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+
+header .navbar a:hover {
+    color: white;
+}
+
+header .navbar a:hover::after {
+    transform: scaleX(1);
+}
+
+header .icons a {
+    font-size: 2.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-left: 2rem;
+    transition: color .2s ease, transform .2s ease;
+}
+
+header .icons a:hover {
+    color: crimson;
+    transform: translateY(-.2rem);
+}
+
+header #toggler {
+    display: none;
+}
+
+header .fa-bars {
+    font-size: 2.8rem;
+    color: white;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: .1rem solid rgba(220, 20, 60, 0.3) !important;
+    display: none;
+    transition: background .2s ease;
+}
+
+header .fa-bars:hover {
+    background: rgba(220, 20, 60, 0.15);
+}
+
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    header {
+        padding: 1.6rem 2rem;
+    }
+
+    section {
+        padding: 2rem;
+    }
+
+    .home {
+        background-position: left;
+    }
+}
+
+@media (max-width: 768px) {
+    header .fa-bars {
+        display: block;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(8, 24, 37, 0.97);
+        border-top: .1rem solid rgba(220, 20, 60, 0.2);
+        display: block;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        overflow: hidden;
+        transition: clip-path .3s ease;
+        /* FIX: prevent hidden navbar links from being clickable when collapsed */
+        pointer-events: none;
+    }
+
+    header #toggler:checked ~ .navbar {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        /* FIX: restore pointer events only when navbar is open */
+        pointer-events: all;
+    }
+
+    header .navbar a {
+        margin: 1rem 1.5rem;
+        padding: 1.2rem 1.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: .1rem solid rgba(255, 255, 255, 0.07) !important;
+        border-radius: .4rem;
+        display: block;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    header .navbar a::after {
+        display: none;
+    }
+
+    .home .content h3 {
+        font-size: 5rem;
+    }
+
+    .home .content span {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+
+/* ─── HOME ───────────────────────────────────────── */
+.home {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../images/image0.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.home::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    /* FIX: overlay was blocking clicks on the fixed header above it */
+    pointer-events: none;
+}
+
+.home .content {
+    max-width: 50rem;
+    position: relative;
+    z-index: 1;
+}
+
+.home .content h3::before {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: .4rem;
+    background: crimson;
+    margin-bottom: 1.5rem;
+    border-radius: .2rem;
+}
+
+.home .content h3 {
+    font-size: 6rem;
+    color: white;
+    font-weight: bolder;
+    line-height: 1.2;
+    letter-spacing: .2rem;
+    text-shadow: 0 .2rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.home .content h3 .accent {
+    color: crimson;
+}
+
+.home .content span {
+    display: block;
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 1rem 0;
+    line-height: 1.8;
+    letter-spacing: .05rem;
+}
+
+
+/* ─── SECTION TITLES ─────────────────────────────── */
+section h2 {
+    font-size: 3.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+section h2::after {
+    content: '';
+    width: 6rem;
+    height: .3rem;
+    background: crimson;
+    display: block;
+    margin: 1rem auto;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   PRODUCTS
+═══════════════════════════════════════════════════ */
+.products {
+    background: #081825;
+    padding: 6rem 9%;
+}
+
+.products .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    gap: 2.5rem;
+}
+
+.products .box {
+    background: rgba(255, 255, 255, 0.03);
+    border: .1rem solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.products .box:hover {
+    transform: translateY(-.7rem);
+    border-color: rgba(220, 20, 60, 0.35);
+    box-shadow: 0 1.5rem 3.5rem rgba(220, 20, 60, 0.1);
+}
+
+
+.products .box img {
+    width: 100%;
+    height: 22rem;
+    object-fit: cover;
+    display: block;
+    overflow: hidden;
+    transition: transform .45s ease;
+}
+
+.products .box:hover img {
+    transform: scale(1.07);
+}
+
+.products .box h3 {
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: .05rem;
+    margin: 1.8rem 1.8rem .5rem;
+}
+
+.products .price {
+    color: crimson;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: .05rem;
+    margin: 0 1.8rem;
+}
+
+.products .box .btn {
+    display: inline-block;
+    width: calc(100% - 3.6rem);
+    margin: 1.6rem 1.8rem 2.2rem;
+    font-size: 1.4rem;
+    padding: 1rem 3rem;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════════ */
+.about {
+    background: #0b2233;
+    padding: 7rem 9%;
+}
+
+.about .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+    align-items: center;
+}
+
+.about .image,
+.about .content {
+    flex: 1 1 38rem;
+}
+
+.about .image {
+    position: relative;
+}
+
+.about .image::before {
+    content: '';
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;
+    width: 100%;
+    height: 100%;
+    border: .2rem solid rgba(220, 20, 60, 0.3);
+    border-radius: .9rem;
+    z-index: 0;
+    transition: top .3s ease, left .3s ease;
+}
+
+.about .image:hover::before {
+    top: -2.2rem;
+    left: -2.2rem;
+}
+
+.about img {
+    width: 100%;
+    border-radius: .7rem;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border: .1rem solid rgba(255, 255, 255, 0.07) !important;
+}
+
+.about .content h3 {
+    color: white;
+    font-size: 2.8rem;
+    letter-spacing: .1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1.2rem;
+}
+
+.about .content h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 4rem;
+    height: .3rem;
+    background: crimson;
+    border-radius: .2rem;
+}
+
+.about .content p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1.5rem;
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+}
+
+.about .content .features {
+    list-style: none;
+    margin: 1.8rem 0 .5rem;
+}
+
+.about .content .features li {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.45rem;
+    padding: .8rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: .1rem solid rgba(255, 255, 255, 0.05);
+}
+
+.about .content .features li:last-child {
+    border-bottom: none;
+}
+
+.about .content .features li i {
+    color: crimson;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════ */
+.contact {
+    background: #081825;
+    padding: 6rem 9%;
+}
+
+.contact form {
+    max-width: 64rem;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.02);
+    border: .1rem solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.2rem;
+    padding: 4rem;
+}
+
+.contact .inputBox {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.contact .inputBox input {
+    flex: 1;
+    min-width: 18rem;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: .1rem solid rgba(255, 255, 255, 0.1) !important;
+    color: white;
+    border-radius: .6rem;
+    font-size: 1.5rem;
+    transition: border-color .3s ease, background .3s ease;
+}
+
+.contact input::placeholder,
+.contact textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 1.4rem;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+    border-color: rgba(220, 20, 60, 0.5) !important;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.contact textarea {
+    height: 16rem;
+    resize: vertical;
+    margin-bottom: 1.5rem;
+}
+
+.contact input[type="submit"] {
+    width: auto;
+    cursor: pointer;
+    display: inline-block;
+    padding: 1.2rem 4rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: .15rem;
+    color: white;
+    background: transparent;
+    border: .2rem solid crimson !important;
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color .3s ease;
+}
+
+.contact input[type="submit"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: crimson;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+
+.contact input[type="submit"]:hover::before {
+    transform: scaleX(1);
+}
+
+.contact input[type="submit"]:hover {
+    color: white;
+}
+
+
+/* ─── RESPONSIVE (section overrides) ────────────── */
+@media (max-width: 768px) {
+    .products,
+    .about,
+    .contact {
+        padding: 5rem 2rem;
+    }
+
+    .about .image::before {
+        display: none;
+    }
+
+    .contact form {
+        padding: 2.5rem 2rem;
+    }
+}

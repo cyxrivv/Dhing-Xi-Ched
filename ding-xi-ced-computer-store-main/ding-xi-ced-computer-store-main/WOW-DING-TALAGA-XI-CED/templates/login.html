@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<header>
+    <input type="checkbox" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+    <a href="{{ url_for('index') }}" class="logo">Dhing Xi Ched<span>.</span></a>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('index') }}#products">Products</a>
+        <a href="{{ url_for('index') }}#about">About</a>
+        <a href="{{ url_for('index') }}#contact">Contact</a>
+    </nav>
+    <div class="icons">
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+        <a href="{{ url_for('login') }}" class="fas fa-user"></a>
+    </div>
+</header>
+
+<section class="home" id="home">
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+
+            {% if error %}
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+            </div>
+            {% endif %}
+
+            {% if success %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> {{ success }}
+            </div>
+            {% endif %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="input-box">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox" name="remember"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
